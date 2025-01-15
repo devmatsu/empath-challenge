@@ -110,10 +110,10 @@ Example response:
 ## API Usage Examples (Deployed)
 ### 1. Generate Random Number
 ```bash
-  curl -X GET http://dgqxzshhg4.execute-api.sa-east-1.amazonaws.com/random
+  curl -X GET https://api.devmatsu.com/random
 ```
 
 ### 2. Retrieve Last 5 Generated Numbers (Logs)
 ```bash
-  curl -X GET http://dgqxzshhg4.execute-api.sa-east-1.amazonaws.com/random/logs
+  curl -X GET https://api.devmatsu.com/random/logs
 ```
