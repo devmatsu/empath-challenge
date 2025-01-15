@@ -36,7 +36,12 @@ export async function getLastLogs(tableName: string, limit: number = 5): Promise
       })
     );
 
-    return result.Items || [];
+    const filteredResult = result.Items?.map(item => ({
+      timestamp: item.timestamp,
+      randomNumber: item.randomNumber,
+    }));
+
+    return filteredResult;
   } catch (error) {
     console.error("Error retrieving logs from DynamoDB:", error);
     throw error;

@@ -14,7 +14,7 @@ export default $config({
       fields: {
         id: "string",
         itemType: "string",
-        timestamp: "number",
+        timestamp: "string",
       },
       primaryIndex: { hashKey: "id" },
       globalIndexes: {

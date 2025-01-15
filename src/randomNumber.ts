@@ -19,7 +19,7 @@ export async function generate(): Promise<LambdaResponse> {
     const item = {
       id: uuidv4(),
       randomNumber,
-      timestamp: Date.now(),
+      timestamp: new Date().toISOString(),
       itemType: "logs",
     };
 
