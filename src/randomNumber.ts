@@ -1,8 +1,17 @@
-export async function generate() {
+type LambdaResponse = {
+  statusCode: number;
+  body: string;
+};
+
+function generateRandomNumber(): number {
+  const MIN_NUMBER = 0;
+  const MAX_NUMBER = 10000;
+  return Math.floor(Math.random() * (MAX_NUMBER - MIN_NUMBER + 1)) + MIN_NUMBER;
+}
+
+export async function generate(): Promise<LambdaResponse> {
   try {
-    const MIN_NUMBER = 0;
-    const MAX_NUMBER = 10000;
-    const randomNumber = Math.floor(Math.random() * (MAX_NUMBER - MIN_NUMBER + 1)) + MIN_NUMBER;
+    const randomNumber: number = generateRandomNumber();
 
     return {
       statusCode: 200,
