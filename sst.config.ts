@@ -26,7 +26,9 @@ export default $config({
       },
     });
 
-    const api = new sst.aws.ApiGatewayV2("MyApi");
+    const { useCustomDomain } = process.env;
+    const altConfig = useCustomDomain ? { domain: process.env.DOMAIN } : {};
+    const api = new sst.aws.ApiGatewayV2("MyApi", altConfig);
     
     api.route("GET /random", {
       handler: "src/randomNumber.generate",
