@@ -13,7 +13,7 @@ export default $config({
     const api = new sst.aws.ApiGatewayV2("MyApi");
 
     api.route("GET /", {
-      handler: "src/lambda.handler",
+      handler: "src/randomNumber.generate",
     });
 
     return {
