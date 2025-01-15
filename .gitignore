@@ -1,0 +1,14 @@
+# SST local cache and temporary files
+.sst
+
+# Node.js dependencies
+node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
