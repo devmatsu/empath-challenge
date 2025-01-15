@@ -1,0 +1,19 @@
+{
+  "name": "empath-challenge",
+  "version": "1.0.0",
+  "description": "This repository contains the solution to the **Empath SST Node.js Serverless Application Challenge**.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@serverless-stack/resources": "^1.18.4",
+    "sst": "3.5.13"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.147"
+  }
+}
