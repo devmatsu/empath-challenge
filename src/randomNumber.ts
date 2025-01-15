@@ -1,3 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
+import { saveItem } from "./db/dynamo";
+
 type LambdaResponse = {
   statusCode: number;
   body: string;
@@ -12,6 +15,12 @@ function generateRandomNumber(): number {
 export async function generate(): Promise<LambdaResponse> {
   try {
     const randomNumber: number = generateRandomNumber();
+
+    await saveItem(process.env.GENERATED_NUMBERS_TABLE, {
+      id: uuidv4(),
+      randomNumber,
+      timestamp: new Date().toISOString(),
+    })
 
     return {
       statusCode: 200,
