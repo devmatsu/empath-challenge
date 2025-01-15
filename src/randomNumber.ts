@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { saveItem } from "./db/dynamo";
+import { saveItem, getLastLogs } from "./db/dynamo";
 
 type LambdaResponse = {
   statusCode: number;
@@ -15,12 +15,15 @@ function generateRandomNumber(): number {
 export async function generate(): Promise<LambdaResponse> {
   try {
     const randomNumber: number = generateRandomNumber();
-
-    await saveItem(process.env.GENERATED_NUMBERS_TABLE, {
+    const tableName = process.env.GENERATED_NUMBERS_TABLE;
+    const item = {
       id: uuidv4(),
       randomNumber,
-      timestamp: new Date().toISOString(),
-    })
+      timestamp: Date.now(),
+      itemType: "logs",
+    };
+
+    await saveItem(tableName, item);
 
     return {
       statusCode: 200,
@@ -28,6 +31,24 @@ export async function generate(): Promise<LambdaResponse> {
     };
   } catch (error) {
     console.error("Error generating random number:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Internal Server Error" }),
+    };
+  }
+}
+
+export async function getLogs(): Promise<LambdaResponse> {
+  try {
+    const tableName = process.env.GENERATED_NUMBERS_TABLE;
+    const last5Numbers = await getLastLogs(tableName, 5);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(last5Numbers),
+    };
+  } catch (error) {
+    console.error("Error retrieving logs:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ message: "Internal Server Error" }),
