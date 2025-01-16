@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { saveItem, getLastLogs } from "./db/dynamo";
+import { saveItem, getLastLogs } from "../db/dynamo";
 
 type LambdaResponse = {
   statusCode: number;

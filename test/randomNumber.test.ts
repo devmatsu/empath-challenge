@@ -1,4 +1,4 @@
-import { generate, getLogs } from "../src/randomNumber";
+import { generate, getLogs } from "../src/functions/randomNumber";
 import { saveItem, getLastLogs } from "../src/db/dynamo";
 
 jest.mock("../src/db/dynamo");

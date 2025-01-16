@@ -13,6 +13,7 @@
     "@aws-sdk/client-dynamodb": "^3.726.1",
     "@aws-sdk/lib-dynamodb": "^3.726.1",
     "@serverless-stack/resources": "^1.18.4",
+    "pg": "^8.13.1",
     "sst": "3.5.13"
   },
   "devDependencies": {

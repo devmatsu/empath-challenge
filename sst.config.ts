@@ -10,6 +10,17 @@ export default $config({
     };
   },
   async run() {
+    const vpc = new sst.aws.Vpc("MyVpc", { nat: "managed" });
+    const postgres = new sst.aws.Postgres("MyPostgres", {
+      vpc,
+      dev: {
+        username: "postgres",
+        password: "password",
+        database: "local",
+        port: 5432,
+      },
+    });
+
     const table = new sst.aws.Dynamo("GeneratedNumbers", {
       fields: {
         id: "string",
@@ -31,7 +42,7 @@ export default $config({
     const api = new sst.aws.ApiGatewayV2("MyApi", altConfig);
     
     api.route("GET /random", {
-      handler: "src/randomNumber.generate",
+      handler: "src/functions/randomNumber.generate",
       environment: {
         GENERATED_NUMBERS_TABLE: table.name,
       },
@@ -42,9 +53,9 @@ export default $config({
         },
       ]
     });
-    
+
     api.route("GET /random/logs", {
-      handler: "src/randomNumber.getLogs",
+      handler: "src/functions/randomNumber.getLogs",
       environment: {
         GENERATED_NUMBERS_TABLE: table.name,
       },
@@ -56,9 +67,28 @@ export default $config({
       ]
     });
 
+    api.route("POST /data", {
+      handler: "src/functions/dataHandler.postData",
+      environment: {
+        DATABASE_NAME: postgres.database,
+        DATABASE_HOST: postgres.host,
+        DATABASE_PORT: postgres.port.toString(),
+        DATABASE_USER: postgres.username,
+        DATABASE_PASSWORD: postgres.password,
+      },
+      vpc,
+      permissions: [
+        {
+          actions: ["*"],
+          resources: ["*"]
+        },
+      ]
+    });
+
     return {
       url: api.url,
       table: table.name,
+      postgres: postgres.database,
     };
   },
 });

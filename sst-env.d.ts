@@ -13,6 +13,17 @@ declare module "sst" {
       "type": "sst.aws.ApiGatewayV2"
       "url": string
     }
+    "MyPostgres": {
+      "database": string
+      "host": string
+      "password": string
+      "port": number
+      "type": "sst.aws.Postgres"
+      "username": string
+    }
+    "MyVpc": {
+      "type": "sst.aws.Vpc"
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />
