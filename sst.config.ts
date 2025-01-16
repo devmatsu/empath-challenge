@@ -37,8 +37,8 @@ export default $config({
       },
     });
 
-    const { useCustomDomain } = process.env;
-    const altConfig = useCustomDomain ? { domain: process.env.DOMAIN } : {};
+    const { USE_CUSTOM_DOMAIN } = process.env;
+    const altConfig = USE_CUSTOM_DOMAIN ? { domain: process.env.DOMAIN } : {};
     const api = new sst.aws.ApiGatewayV2("MyApi", altConfig);
     
     api.route("GET /random", {
