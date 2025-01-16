@@ -135,7 +135,7 @@ Example response:
 ## Deployment
 ### Deploy the stack:
 ```bash
-  sst deploy --stage prod
+  sst deploy --stage production
 ```
 
 ## API Usage Examples (Deployed)
