@@ -31,8 +31,9 @@ You can find the full challenge details [here](./CHALLENGE.md).
 
 ## Prerequisites
 - **Node.js** (LTS version recommended)
-- [AWS CLI](https://aws.amazon.com/cli/) and AWS account with sufficient permissions
+- [AWS CLI](https://aws.amazon.com/cli) and AWS account with sufficient permissions
 - [SST CLI](https://sst.dev)
+- [Docker](https://www.docker.com) (for running a local PostgreSQL database)
 
 ## Steps to run locally
 1. Ensure AWS credentials are configured:
@@ -40,18 +41,29 @@ You can find the full challenge details [here](./CHALLENGE.md).
   aws configure
 ```
 
-2. Clone the repository:
+2. Start a local PostgreSQL database using Docker:
+```
+  docker run --name postgres-dev -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=local -p 5432:5432 -d postgres
+```
+
+- POSTGRES_USER: Sets the username to `postgres`.
+- POSTGRES_PASSWORD: Sets the password to `password`.
+- POSTGRES_DB: Creates a default database named `local`.
+- -p 5432:5432: Exposes the PostgreSQL service on port `5432`.
+
+
+3. Clone the repository:
 ```bash
   git clone https://github.com/devmatsu/empath-challenge
   cd empath-challenge
 ```
 
-3. Install dependencies:
+4. Install dependencies:
 ```bash
   npm install
 ```
 
-4. Start the SST development environment:
+5. Start the SST development environment:
 ```bash
   sst dev
 ```
@@ -90,15 +102,34 @@ Example request:
 Example response:
 ```json
   [
-	  {
-	   	"timestamp": "2025-01-15T22:58:32.911Z",
-	   	"randomNumber": 4353
-	  },
-	  {
-	   	"timestamp": "2025-01-15T22:58:32.776Z",
-	   	"randomNumber": 5332
-	  }
+    {
+      "timestamp": "2025-01-15T22:58:32.911Z",
+      "randomNumber": 4353
+    },
+    {
+      "timestamp": "2025-01-15T22:58:32.776Z",
+      "randomNumber": 5332
+    }
   ]
+```
+
+### 3. Add Data to RDS
+Endpoint: POST `/data`  
+Description: Accepts a JSON object and stores it in the RDS database.
+Example request:
+```
+  curl -X POST http://<your-api-url>/data \
+  -H "Content-Type: application/json" \
+  -d '{"example": true}'
+```
+Example response:
+```json
+  {
+    "id": 1,
+    "data": {
+      "example": true
+    }
+  }
 ```
 
 ## Deployment
@@ -116,4 +147,11 @@ Example response:
 ### 2. Retrieve Last 5 Generated Numbers (Logs)
 ```bash
   curl -X GET https://api.devmatsu.com/random/logs
+```
+
+### 3. Add Data to RDS
+```bash
+  curl -X POST https://api.devmatsu.com/data \
+  -H "Content-Type: application/json" \
+  -d '{"key": "value"}'
 ```
