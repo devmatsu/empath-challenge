@@ -133,6 +133,15 @@ Example response:
 ```
 
 ## Deployment
+### Custom Domain Configuration (Optional)
+First, ensure the custom domain is set up in Route 53. To use a custom domain for the API, configure the following before deploying the stack:
+```bash
+  export USE_CUSTOM_DOMAIN=true
+  export DOMAIN=api.devmatsu.com
+```
+- USE_CUSTOM_DOMAIN: Set this to true to enable the custom domain configuration.
+- DOMAIN: Specify the custom domain name (e.g., api.devmatsu.com).
+
 ### Deploy the stack:
 ```bash
   sst deploy --stage production
