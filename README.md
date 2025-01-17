@@ -158,9 +158,11 @@ First, ensure the custom domain is set up in Route 53. To use a custom domain fo
   curl -X GET https://api.devmatsu.com/random/logs
 ```
 
-### 3. Add Data to RDS
+### 3. Add Data to RDS (Removed Due to Costs)
 ```bash
   curl -X POST https://api.devmatsu.com/data \
   -H "Content-Type: application/json" \
   -d '{"key": "value"}'
 ```
+> **Note:** This route is no longer operational. The PostgreSQL instance and NAT Gateway were removed due to costs, as the NAT Gateway was only being used by PostgreSQL.
+![NAT Gateway Costs](./nat_gateway_costs.png)
