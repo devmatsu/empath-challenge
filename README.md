@@ -1,7 +1,6 @@
 # Empath - SST Node.js Serverless Application Challenge
-This repository contains the solution to the **Empath SST Node.js Serverless Application Challenge**.  
+This repository contains the solution to the **Empath SST Node.js Serverless Application Challenge**, focused on building a serverless application with AWS services like DynamoDB and optionally extending functionality with RDS. 
 
-The challenge involves building a serverless application using **Serverless Stack (SST)**, integrating AWS services like DynamoDB, and optionally extending functionality with RDS. 
 
 ## Contents
 1. [Challenge](#challenge)
@@ -17,7 +16,6 @@ The challenge involves building a serverless application using **Serverless Stac
 You can find the full challenge details [here](./CHALLENGE.md).
 
 ## Deliverables
-  
 * [A fully functional **Node.js-based** SST application, including DynamoDB integration](https://github.com/devmatsu/empath-challenge/milestone/1):
 	* [Create `/random` Endpoint](https://github.com/devmatsu/empath-challenge/issues/2)
  	* [Integrate DynamoDB Logging](https://github.com/devmatsu/empath-challenge/issues/3)
@@ -30,10 +28,11 @@ You can find the full challenge details [here](./CHALLENGE.md).
 ---
 
 ## Prerequisites
-- **Node.js** (LTS version recommended)
-- [AWS CLI](https://aws.amazon.com/cli) and AWS account with sufficient permissions
-- [SST CLI](https://sst.dev)
-- [Docker](https://www.docker.com) (for running a local PostgreSQL database)
+- **Node.js** (LTS version recommended, [install here](https://nodejs.org))
+- **AWS CLI** ([guide](https://aws.amazon.com/cli)) with configured credentials.
+- **SST CLI** ([setup guide](https://sst.dev)).
+- **Docker** ([download](https://www.docker.com)) for PostgreSQL.
+
 
 ## Steps to run locally
 1. Ensure AWS credentials are configured:
@@ -45,12 +44,6 @@ You can find the full challenge details [here](./CHALLENGE.md).
 ```
   docker run --name postgres-dev -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=local -p 5432:5432 -d postgres
 ```
-
-- POSTGRES_USER: Sets the username to `postgres`.
-- POSTGRES_PASSWORD: Sets the password to `password`.
-- POSTGRES_DB: Creates a default database named `local`.
-- -p 5432:5432: Exposes the PostgreSQL service on port `5432`.
-
 
 3. Clone the repository:
 ```bash
@@ -80,26 +73,24 @@ If everything is correct it should return something like this:
 ## API Endpoints
 ### 1. Generate Random Number  
 Endpoint: GET `/random`  
-Description: Generates and returns a random number. The number is also stored in DynamoDB with a timestamp.
-Example request:
+Generates and returns a random number. The number is also stored in DynamoDB with a timestamp.
 ```
   curl -X GET http://<your-api-url>/random
 ```
-Example response:
+Response:
 ```json
   {
     "randomNumber": 1234
   }
 ```
 
-### 2. Retrieve Last 5 Generated Numbers (Logs)
+### 2. Retrieve Last 5 Generated Numbers
 Endpoint: GET `/random/logs`  
-Description: Retrieves the last 5 random numbers stored in DynamoDB.
-Example request:
+Retrieves the last 5 random numbers stored in DynamoDB.
 ```
   curl -X GET http://<your-api-url>/random/logs
 ```
-Example response:
+Response:
 ```json
   [
     {
@@ -115,14 +106,13 @@ Example response:
 
 ### 3. Add Data to RDS
 Endpoint: POST `/data`  
-Description: Accepts a JSON object and stores it in the RDS database.
-Example request:
+Accepts a JSON object and stores it in the RDS database.
 ```
   curl -X POST http://<your-api-url>/data \
   -H "Content-Type: application/json" \
   -d '{"example": true}'
 ```
-Example response:
+Response:
 ```json
   {
     "id": 1,
@@ -153,7 +143,7 @@ First, ensure the custom domain is set up in Route 53. To use a custom domain fo
   curl -X GET https://api.devmatsu.com/random
 ```
 
-### 2. Retrieve Last 5 Generated Numbers (Logs)
+### 2. Retrieve Last 5 Generated Numbers
 ```bash
   curl -X GET https://api.devmatsu.com/random/logs
 ```
