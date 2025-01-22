@@ -16,7 +16,7 @@ This repository contains the solution to the **Empath SST Node.js Serverless App
 You can find the full challenge details [here](./CHALLENGE.md).
 
 ## Deliverables
-* [A fully functional **Node.js-based** SST application, including DynamoDB integration](https://github.com/devmatsu/empath-challenge/milestone/1):
+* [A fully functional **Node.js-based** SST application, including DynamoDB integration](https://github.com/devmatsu/empath-challenge/milestone/1?closed=1):
 	* [Create `/random` Endpoint](https://github.com/devmatsu/empath-challenge/issues/2)
  	* [Integrate DynamoDB Logging](https://github.com/devmatsu/empath-challenge/issues/3)
 	* [Create `/random/logs` Endpoint](https://github.com/devmatsu/empath-challenge/issues/4) 
