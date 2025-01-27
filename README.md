@@ -29,7 +29,7 @@ You can find the full challenge details [here](./CHALLENGE.md).
 
 ### Prerequisites
 - **Node.js** (LTS version recommended, [install here](https://nodejs.org))
-- **AWS CLI** ([guide](https://aws.amazon.com/cli)) with configured credentials. (To run locally you need to have AWS credentials setup)
+- **AWS CLI** ([guide](https://aws.amazon.com/cli)) with properly configured credentials, essential for running the project locally.
 - **SST CLI** ([setup guide](https://sst.dev)).
 - **Docker** ([download](https://www.docker.com)) for running a local PostgreSQL instance during development.
 
